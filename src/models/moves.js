@@ -11,6 +11,20 @@ async function getAllMoves() {
   return allMoves;
 }
 
+async function getMoveByID(id) {
+  const knex = await connectDatabase();
+
+  let move = await knex("moves")
+    .select("*").where({
+      ID: id
+    });
+
+  knex.destroy();
+
+  return move;
+}
+
 module.exports = {
   getAllMoves,
+  getMoveByID
 };

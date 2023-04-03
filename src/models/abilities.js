@@ -11,6 +11,20 @@ async function getAllAbilities() {
   return allAbilities;
 }
 
+async function getAbilityByID(id) {
+  const knex = await connectDatabase();
+
+  let ability = await knex("abilities")
+    .select("*").where({
+      ID: id
+    });
+
+  knex.destroy();
+
+  return ability;
+}
+
 module.exports = {
   getAllAbilities,
+  getAbilityByID
 };
